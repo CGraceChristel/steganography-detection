@@ -9,6 +9,8 @@ app = Flask(__name__)
 
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
 # Load CNN model
 model = load_model('../model/cnn_model.h5')
