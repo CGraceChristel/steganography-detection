@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steganography Detection</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #2b0a3d, #5f0f8b, #8e2de2);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            margin-top: 30px;
+            font-size: 32px;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            margin: 40px auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+            color: white;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #a4508b, #5f0f8b);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #c471ed, #f64f59);
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .confidence {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        img {
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+        .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 999;
+    color: #fff;
+}
+  
+   .spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #5f0f8b;
+    border-top: 6px solid #c471ed;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+    @keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+h2 {
+    text-shadow: 0 0 10px #c471ed, 0 0 20px #8e2de2;
+}
+
+.container {
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 20px #8e2de2, 0 0 40px #5f0f8b;
+}
+
+button {
+    box-shadow: 0 0 10px #c471ed;
+}
+
+button:hover {
+    box-shadow: 0 0 20px #f64f59, 0 0 40px #c471ed;
+}
+
+.result {
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+    </style>
+</head>
+
+<body>
+
+    <h2>🔐 Steganography Detection (CNN)</h2>
+
+    <div class="container">
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required><br>
+            <button type="submit">🚀 Upload & Detect</button>
+        </form>
+        <a href="/graph">
+            <button>📊 View Accuracy Graph</button>
+        </a>
+
+        {% if result %}
+            <div class="result">
+                Result: {{ result }}
+            </div>
+        {% endif %}
+
+        {% if confidence %}
+            <div class="confidence">
+                Confidence: {{ confidence }}
+            </div>
+        {% endif %}
+
+        {% if image_path %}
+            <img src="{{ image_path }}" width="300">
+        {% endif %}
+
+    </div>
+    <div id="loader" class="loader" style="display:none;">
+    <div class="spinner"></div>
+    <p>Analyzing Image...</p>
+</div>
+
+<script>
+document.querySelector("form").addEventListener("submit", function() {
+    document.getElementById("loader").style.display = "flex";
+});
+</script>
+
+</body>
+</html>
