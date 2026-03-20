@@ -1,4 +1,6 @@
-tensorflow
-numpy
-opencv-python
 flask
+tensorflow
+opencv-python-headless
+numpy
+joblib
+gunicorn
